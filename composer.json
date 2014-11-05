@@ -1,0 +1,16 @@
+{
+    "name": "dbrisinajumi/d2calendar",
+    "description": "Calendar",
+    "keywords": ["Calendar","yii"],
+    "type": "yii-extension",
+    "license": "BSD-2-Clause",
+    "authors": [
+        {
+            "name": "Uldis Nelsons",
+            "email": "uldis@weberp.lv"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.2"
+    }
+}
