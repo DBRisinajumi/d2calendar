@@ -17,7 +17,12 @@
  * NOTE, this file must be saved in UTF-8 encoding.
  */
 return array (
-  'Create' => 'Izveidot',
-  'Invalid request. Please do not repeat this request again.' => 'Kļūdains pieprasījums.',
-  'The requested page does not exist.' => 'Pieprasītā lapa neeksistē',
+  'CLED_TYPE_HOLLIDAY' => 'Brīvdiena',
+  'CLED_TYPE_PUBLIC_HOLLIDAY' => 'Svētku diena',
+  'CLED_TYPE_WORKING_DAY' => 'Darba diena',
+  'Cled' => '',
+  'Cled Date' => 'Datums',
+  'Cled Notes' => 'Piezīmes',
+  'Cled Type' => 'Tipts',
+  'Kalendārs' => 'Kalendārs',
 );
