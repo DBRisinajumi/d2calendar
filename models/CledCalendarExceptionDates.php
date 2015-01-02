@@ -114,12 +114,22 @@ class CledCalendarExceptionDates extends BaseCledCalendarExceptionDates
      * @return boolean
      */
     public function fillYear($year){
-        $sql = "select count(0) from cled_calendar_exception_dates where year(cled_date) = " . $year;
-        $count = Yii::app()->db->createCommand($sql)->queryScalar();
+
+        $sql = "set @year = :year";
+        $rawData = Yii::app()->db->createCommand($sql);
+        $rawData->bindParam(":year", $year, PDO::PARAM_INT);                
+        $rawData->query();        
+        
+        //validate, if year filled
+        $sql = "select count(0) from cled_calendar_exception_dates where year(cled_date) = @year";
+        $rawData = Yii::app()->db->createCommand($sql);
+        $count = $rawData->queryScalar();
         if ($count > 0) {
             return TRUE;
         }
-        $sql = "set @date := '" . $year . "-01-01'";
+        
+        //fill year
+        $sql = "set @date := concat(@year,'-01-01')";
         while (true) {
             Yii::app()->db->createCommand($sql)->query();
             $sql = "INSERT INTO cled_calendar_exception_dates "
@@ -144,10 +154,17 @@ class CledCalendarExceptionDates extends BaseCledCalendarExceptionDates
     
     public function findhMonth($month)
     {
+        
+        $sql = "set @month = :month";
+        $rawData = Yii::app()->db->createCommand($sql);
+        $rawData->bindParam(":month", $month, PDO::PARAM_STR);                
+        $rawData->query();  
+        
         $criteria = new CDbCriteria;
         
         //filtrēšana pēc mēneša
-        $criteria->AddCondition("cled_date >= ADDDATE('".$month."-01',-1) AND cled_date <= ADDDATE('".$month."-01', INTERVAL  1 MONTH )");
+        $criteria->AddCondition("cled_date >= ADDDATE(concat(@month,'-01',-1) 
+                AND cled_date <= ADDDATE(@month,'-01', INTERVAL  1 MONTH )");
         $criteria->order = 'cled_date';
         
         return self::model()->findAll($criteria);
