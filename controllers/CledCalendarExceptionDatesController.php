@@ -44,7 +44,10 @@ public function accessRules()
     }
 
     public function actionGenerate($year){
-        CledCalendarExceptionDates::model()->fillYear($year);
+        
+        if($year<date('Y')+2 && $year>date('Y')-2){
+            CledCalendarExceptionDates::model()->fillYear($year);
+        }
         $this->redirect(array('admin'));
         
     }
