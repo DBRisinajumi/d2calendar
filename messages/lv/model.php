@@ -25,4 +25,5 @@ return array (
   'Cled Notes' => 'Piezīmes',
   'Cled Type' => 'Tipts',
   'Kalendārs' => 'Kalendārs',
+  'Calendar' => 'Kalendārs',
 );
