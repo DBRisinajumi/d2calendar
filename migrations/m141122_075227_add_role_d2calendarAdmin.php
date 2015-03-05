@@ -6,7 +6,7 @@ class m141122_075227_add_role_d2calendarAdmin extends EDbMigration
 	{
         
         $this->execute("        
-            REPLACE	 `authitem` 
+            REPLACE	 `AuthItem` 
             (`name`, `type`, `description`) 
             VALUES 
             ('d2calendarAdmin', '2', 'd2calendarAdmin'); 
@@ -16,7 +16,7 @@ class m141122_075227_add_role_d2calendarAdmin extends EDbMigration
 	public function down()
 	{
         $this->execute("        
-            DELETE FROM  `authitem` 
+            DELETE FROM  `AuthItem` 
             WHERE
              `name` ='d2calendarAdmin';
         ");        
