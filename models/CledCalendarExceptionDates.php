@@ -151,7 +151,11 @@ class CledCalendarExceptionDates extends BaseCledCalendarExceptionDates
             }
         }
     }
-    
+
+    /**
+     * @param string $month format YYYY-MM
+     * @return array|mixed|null|static[]
+     */
     public function findhMonth($month)
     {
         
@@ -163,8 +167,8 @@ class CledCalendarExceptionDates extends BaseCledCalendarExceptionDates
         $criteria = new CDbCriteria;
         
         //filtrēšana pēc mēneša
-        $criteria->AddCondition("cled_date >= ADDDATE(concat(@month,'-01',-1) 
-                AND cled_date <= ADDDATE(@month,'-01', INTERVAL  1 MONTH )");
+        $criteria->AddCondition("cled_date >= ADDDATE(concat(@month,'-01'),-1) 
+                AND cled_date <= ADDDATE(concat(@month,'-01'), INTERVAL  1 MONTH )");
         $criteria->order = 'cled_date';
         
         return self::model()->findAll($criteria);
