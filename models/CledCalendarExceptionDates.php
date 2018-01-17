@@ -168,7 +168,7 @@ class CledCalendarExceptionDates extends BaseCledCalendarExceptionDates
         
         //filtrēšana pēc mēneša
         $criteria->AddCondition("cled_date >= ADDDATE(concat(@month,'-01'),-1) 
-                AND cled_date <= ADDDATE(concat(@month,'-01'), INTERVAL  1 MONTH )");
+                AND cled_date < ADDDATE(concat(@month,'-01'), INTERVAL  1 MONTH )");
         $criteria->order = 'cled_date';
         
         return self::model()->findAll($criteria);
