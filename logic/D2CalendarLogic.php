@@ -26,8 +26,9 @@ class D2CalendarLogic
         $calendar = new CledCalendarExceptionDates();
         /** @var CledCalendarExceptionDates $calendarDay */
         foreach($calendar->findhMonth($month) as $calendarDay){
+            $dayDate = DateTime::createFromFormat('Y-m-d H:i:s', $calendarDay->cled_date .  ' 00:00:00');
             if(!$this->actualDay){
-                $this->actualDay = DateTime::createFromFormat('Y-m-d', $calendarDay->cled_date);
+                $this->actualDay = $dayDate;
             }
             $this->days[$calendarDay->cled_date] = $calendarDay;
         }
@@ -52,7 +53,7 @@ class D2CalendarLogic
         }
         $isActualDay = false;
         foreach($this->days as $dayYMD => $dayModel){
-            $day = DateTime::createFromFormat('Y-m-d', $dayYMD);
+            $day = DateTime::createFromFormat('Y-m-d H:i:s', $dayYMD .  ' 00:00:00');
             if($isActualDay){
                 return $this->actualDay = $day;
             }
