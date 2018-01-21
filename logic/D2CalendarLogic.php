@@ -94,7 +94,7 @@ class D2CalendarLogic
      * @param DateTime|false $date
      * @return bool
      */
-    public function isPublicHolliday($date = false)
+    public function isPublicHoliday($date = false)
     {
         if(!$date){
             $date = $this->actualDay;
