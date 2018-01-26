@@ -159,7 +159,7 @@ class CledCalendarExceptionDates extends BaseCledCalendarExceptionDates
     public function findhMonth($month)
     {
         
-        $sql = "set @month = :month";
+        $sql = "set @month := :month";
         $rawData = Yii::app()->db->createCommand($sql);
         $rawData->bindParam(":month", $month, PDO::PARAM_STR);                
         $rawData->query();  
@@ -167,7 +167,7 @@ class CledCalendarExceptionDates extends BaseCledCalendarExceptionDates
         $criteria = new CDbCriteria;
         
         //filtrēšana pēc mēneša
-        $criteria->AddCondition("cled_date >= ADDDATE(concat(@month,'-01'),-1) 
+        $criteria->AddCondition("cled_date > ADDDATE(concat(@month,'-01'),-1) 
                 AND cled_date < ADDDATE(concat(@month,'-01'), INTERVAL  1 MONTH )");
         $criteria->order = 'cled_date';
         

@@ -70,11 +70,7 @@ class D2CalendarLogic
      */
     public function isWorkingDay($date = false)
     {
-        if(!$date){
-            $date = $this->actualDay;
-        }
-        $dateYmd = $date->format('Y-m-d');
-        return CledCalendarExceptionDates::CLED_TYPE_WORKING_DAY === $this->days[$dateYmd]->cled_type;
+        return CledCalendarExceptionDates::CLED_TYPE_WORKING_DAY === $this->getType($date);
     }
 
     /**
@@ -83,11 +79,7 @@ class D2CalendarLogic
      */
     public function isHoliday($date = false)
     {
-        if(!$date){
-            $date = $this->actualDay;
-        }
-        $dateYmd = $date->format('Y-m-d');
-        return CledCalendarExceptionDates::CLED_TYPE_HOLLIDAY === $this->days[$dateYmd]->cled_type;
+        return CledCalendarExceptionDates::CLED_TYPE_HOLLIDAY === $this->getType($date);
     }
 
     /**
@@ -96,11 +88,21 @@ class D2CalendarLogic
      */
     public function isPublicHoliday($date = false)
     {
+        return CledCalendarExceptionDates::CLED_TYPE_PUBLIC_HOLLIDAY === $this->getType($date);
+    }
+
+    /**
+     * @param bool|DateTime $date
+     * @return string
+     *
+     */
+    public function getType($date = false)
+    {
         if(!$date){
-            $date = $this->actualDay;
+            $date = $this->getActualDay();
         }
         $dateYmd = $date->format('Y-m-d');
-        return CledCalendarExceptionDates::CLED_TYPE_PUBLIC_HOLLIDAY === $this->days[$dateYmd]->cled_type;
+        return $this->days[$dateYmd]->cled_type;
     }
 
 
